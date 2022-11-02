@@ -51,11 +51,11 @@ RUN setcap "cap_net_bind_service=+ep" /usr/bin/php7.2
 RUN php -r "readfile('https://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer
 
 # 安装ohmyzsh
-RUN git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh \  
+RUN git clone https://gitclone.com/github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh \  
     && cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc \
     && sed -i "s/robbyrussell/ys/" ~/.zshrc \
-    && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions \
-    && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting \
+    && git clone https://gitclone.com/github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions \
+    && git clone https://gitclone.com/github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting \
     && sed -i "s/plugins=(git.*)$/plugins=(git zsh-syntax-highlighting zsh-autosuggestions)/" ~/.zshrc
 
 # 安装vim

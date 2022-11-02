@@ -8,7 +8,7 @@ services:
             args:
                 WWWGROUP: '${WWWGROUP}'
                 WWWUSER: '${WWWUSER}'
-        image: dianmob/workspace
+        image: liandock/workspace
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         environment:
@@ -31,23 +31,9 @@ services:
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
-        image: dianmob/php
+        image: liandock/php
         extra_hosts:
             - 'host.docker.internal:host-gateway'
-        ports:
-            - '8001:8001'
-            - '8002:8002'
-            - '8003:8003'
-            - '8004:8004'
-            - '8005:8005'
-            - '8006:8006'
-            - '8007:8007'
-            - '8008:8008'
-            - '8009:8009'
-            - '8010:8010'
-            - '8011:8011'
-            - '8012:8012'
-            - '8013:8013'
         environment:
             WWWUSER: '${WWWUSER}'
             XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
