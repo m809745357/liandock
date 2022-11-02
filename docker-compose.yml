@@ -15,7 +15,15 @@ services:
             WWWUSER: '${WWWUSER}'
         volumes:
             - '${WORKSPACE}:/var/www/html'
+            - '/home/syf/.ssh:/root/.ssh'
         tty: true
+        deploy:
+          resources:
+            limits:
+              cpus: "1.00"
+              memory: 1G
+            reservations:
+              memory: 200M
     php:
         container_name: php
         build:
@@ -35,6 +43,11 @@ services:
             - '8006:8006'
             - '8007:8007'
             - '8008:8008'
+            - '8009:8009'
+            - '8010:8010'
+            - '8011:8011'
+            - '8012:8012'
+            - '8013:8013'
         environment:
             WWWUSER: '${WWWUSER}'
             XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
@@ -42,6 +55,13 @@ services:
         volumes:
             - '${WORKSPACE}:/var/www/html'
             - './docker/php/7.2/supervisord.d:/etc/supervisor/conf.d/supervisord.d'
+        deploy:
+          resources:
+            limits:
+              cpus: "1.00"
+              memory: 1G
+            reservations:
+              memory: 200M
     mysql:
         container_name: mysql
         image: 'mysql/mysql-server:8.0'
@@ -64,6 +84,13 @@ services:
             test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
             retries: 3
             timeout: 5s
+        deploy:
+          resources:
+            limits:
+              cpus: "1.00"
+              memory: 1G
+            reservations:
+              memory: 200M
     openresty:
         container_name: openresty
         image: 'openresty/openresty:1.19.3.1-alpine'
@@ -79,6 +106,13 @@ services:
             - './docker/openresty/nginx/lua:/usr/local/openresty/nginx/lua'
             - './docker/openresty/conf.d:/etc/nginx/conf.d'
             - './docker/openresty/run:/var/run/openresty'
+        deploy:
+          resources:
+            limits:
+              cpus: "0.50"
+              memory: 500M
+            reservations:
+              memory: 200M
     redis:
         container_name: redis
         image: 'redis:alpine'
@@ -92,3 +126,11 @@ services:
             test: ["CMD", "redis-cli", "ping"]
             retries: 3
             timeout: 5s
+        deploy:
+          resources:
+            limits:
+              cpus: "0.50"
+              memory: 500M
+            reservations:
+              memory: 200M
+    
